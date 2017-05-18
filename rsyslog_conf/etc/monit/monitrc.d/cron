@@ -21,5 +21,4 @@
    group crond
    if failed permission 1730 then unmonitor
    if failed uid root        then unmonitor
-   if failed gid crontab     then unmonitor
 
