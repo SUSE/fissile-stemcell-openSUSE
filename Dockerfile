@@ -16,3 +16,11 @@ RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm && gem install configgin --p
 
 # Install additional dependencies
 RUN zypper -n in gettext-tools
+
+ADD monitrc.erb /opt/hcf/monitrc.erb
+
+ADD post-start.sh /opt/hcf/post-start.sh
+RUN chmod ug+x /opt/hcf/post-start.sh
+
+# Add rsyslog configuration
+ADD rsyslog_conf/etc /etc/
