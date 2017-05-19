@@ -12,7 +12,7 @@
    group crond
    include /etc/monit/templates/rootbin
 
- check directory cron_spool with path /var/spool/cron/crontabs
+ check directory cron_spool with path /var/spool/cron/tabs
    group crond
    if failed permission 1730 then unmonitor
    if failed uid root        then unmonitor
