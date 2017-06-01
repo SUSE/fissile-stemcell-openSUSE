@@ -12,7 +12,7 @@ RUN wget -O /usr/bin/dumb-init https://github.com/Yelp/dumb-init/releases/downlo
         && chmod +x /usr/bin/dumb-init
 
 # Install configgin
-RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm && gem install configgin --pre"
+RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm && gem install configgin"
 
 # Install additional dependencies
 RUN zypper -n in gettext-tools
