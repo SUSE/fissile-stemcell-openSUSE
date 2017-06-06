@@ -20,7 +20,7 @@
 (
   flock -n 9 || exit 1
 
-  notyet=$(monit summary | tail -n+3 | grep -v post-start | grep -v 'Accessible\|Running')
+  notyet=$(/var/vcap/bosh/bin/monit summary | tail -n+3 | grep -v post-start | grep -v 'Accessible\|Running')
   if [ -z "$notyet" ]
   then
       scripts="$(find /var/vcap/jobs/*/bin -name post-start)"
