@@ -14,7 +14,7 @@ RUN wget -O /usr/bin/dumb-init https://github.com/Yelp/dumb-init/releases/downlo
 RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm && gem install configgin"
 
 # Install additional dependencies
-RUN zypper -n in gettext-tools
+RUN zypper -n in gettext-tools jq
 
 ADD monitrc.erb /opt/hcf/monitrc.erb
 
