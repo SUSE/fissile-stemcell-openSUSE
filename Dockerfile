@@ -20,10 +20,10 @@ RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm && gem install configgin ${c
 # Install additional dependencies
 RUN zypper -n in gettext-tools jq rsync
 
-ADD monitrc.erb /opt/hcf/monitrc.erb
+ADD monitrc.erb /opt/fissile/monitrc.erb
 
-ADD post-start.sh /opt/hcf/post-start.sh
-RUN chmod ug+x /opt/hcf/post-start.sh
+ADD post-start.sh /opt/fissile/post-start.sh
+RUN chmod ug+x /opt/fissile/post-start.sh
 
 # Add rsyslog configuration
 ADD rsyslog_conf/etc /etc/
