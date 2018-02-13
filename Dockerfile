@@ -1,4 +1,6 @@
-FROM splatform/os-image-opensuse:42.3-29.68.0
+ARG base_image=splatform/os-image-opensuse:42.3-29.68.0
+
+FROM ${base_image}
 
 # Install RVM & Ruby 2.3.1
 RUN zypper -n in --force-resolution libopenssl-devel \
@@ -11,15 +13,17 @@ RUN wget -O /usr/bin/dumb-init https://github.com/Yelp/dumb-init/releases/downlo
         && chmod +x /usr/bin/dumb-init
 
 # Install configgin
-RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm && gem install configgin"
+# Putting this ARG to the top of the file mysteriously makes it always empty :|
+ARG configgin_version
+RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm && gem install configgin ${configgin_version:+--version=${configgin_version}}"
 
 # Install additional dependencies
 RUN zypper -n in gettext-tools jq rsync
 
-ADD monitrc.erb /opt/hcf/monitrc.erb
+ADD monitrc.erb /opt/fissile/monitrc.erb
 
-ADD post-start.sh /opt/hcf/post-start.sh
-RUN chmod ug+x /opt/hcf/post-start.sh
+ADD post-start.sh /opt/fissile/post-start.sh
+RUN chmod ug+x /opt/fissile/post-start.sh
 
 # Add rsyslog configuration
 ADD rsyslog_conf/etc /etc/
