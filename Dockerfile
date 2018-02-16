@@ -18,7 +18,7 @@ ARG configgin_version
 RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm && gem install configgin ${configgin_version:+--version=${configgin_version}}"
 
 # Install additional dependencies
-RUN zypper -n in gettext-tools jq rsync
+RUN zypper -n in jq rsync
 
 ADD monitrc.erb /opt/fissile/monitrc.erb
 
