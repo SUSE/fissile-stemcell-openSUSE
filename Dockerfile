@@ -1,4 +1,4 @@
-ARG base_image=splatform/os-image-opensuse:42.3-29.89.0
+ARG base_image=splatform/os-image-opensuse:42.3-29.90.0
 
 FROM ${base_image}
 
