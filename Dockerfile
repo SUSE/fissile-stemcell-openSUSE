@@ -1,5 +1,4 @@
-ARG base_image=splatform/os-image-opensuse:42.3-29.90.0
-
+ARG base_image
 FROM ${base_image}
 
 # Install RVM & Ruby 2.3.1
