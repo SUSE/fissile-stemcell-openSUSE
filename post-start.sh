@@ -1,5 +1,5 @@
 #!/bin/bash
-#set -e
+set -o errexit -o xtrace
 # Cannot use this generally. Interferes with the check via `monit summary`.
 # I.e. when things are ready the failure of grep to match aborts us.
 
@@ -18,18 +18,21 @@
 # of monit v5.15+ where the issues are fixed.
 
 (
+  exec  >/proc/1/fd/1
+  exec 2>/proc/1/fd/2
   flock -n 9 || exit 1
 
-  notyet=$(/var/vcap/bosh/bin/monit summary | tail -n+3 | grep -v post-start | grep -viw 'Accessible\|Running')
-  if [ -z "$notyet" ]
+  summary="$(/var/vcap/bosh/bin/monit summary)" # Separate to capture exit status
+  if printf "%s" "${summary}" | tail -n+3 | grep -v post-start | grep --silent -viw 'accessible\|running'
   then
-      scripts="$(find /var/vcap/jobs/*/bin -name post-start)"
-      set -e
-      for fname in ${scripts}
-      do
-	  echo bash $fname
-	  bash $fname
-      done
-      touch /var/vcap/monit/ready
+    # Other roles not ready, wait a bit more without returning error
+    exit 0
   fi
+
+  while read -r f ; do
+    echo bash "$f"
+    bash "$f"
+  done < <(find /var/vcap/jobs/*/bin -name post-start)
+  touch /var/vcap/monit/ready
+
 ) 9> /var/vcap/monit/ready.lock
