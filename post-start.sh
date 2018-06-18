@@ -18,8 +18,9 @@ set -o errexit -o xtrace
 # of monit v5.15+ where the issues are fixed.
 
 (
-  exec  >/proc/1/fd/1
-  exec 2>/proc/1/fd/2
+  mkdir -p /var/vcap/sys/log/post-start
+  exec 1>>/var/vcap/sys/log/post-start/post-start.stdout.log
+  exec 2>>/var/vcap/sys/log/post-start/post-start.stderr.log
   flock -n 9 || exit 1
 
   summary="$(/var/vcap/bosh/bin/monit summary)" # Separate to capture exit status
