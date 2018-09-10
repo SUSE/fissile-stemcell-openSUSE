@@ -11,9 +11,8 @@ RUN wget -O /usr/bin/dumb-init https://github.com/Yelp/dumb-init/releases/downlo
         && chmod +x /usr/bin/dumb-init
 
 # Install configgin
-# Putting this ARG to the top of the file mysteriously makes it always empty :|
-ARG configgin_version
-RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm && gem install configgin ${configgin_version:+--version=${configgin_version}}"
+# The configgin version is hardcoded here so a commit is generated when the version is bumped.
+RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm && gem install configgin --version=0.16.3"
 
 # Install additional dependencies
 RUN zypper -n in jq rsync
