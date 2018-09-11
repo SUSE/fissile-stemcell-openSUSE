@@ -12,7 +12,7 @@ RUN wget -O /usr/bin/dumb-init https://github.com/Yelp/dumb-init/releases/downlo
 
 # Install configgin
 # The configgin version is hardcoded here so a commit is generated when the version is bumped.
-RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm && gem install configgin --version=0.16.3"
+RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm && gem install configgin --version=0.17.0"
 
 # Install additional dependencies
 RUN zypper -n in jq rsync
