@@ -1,10 +1,10 @@
 ARG base_image
 FROM ${base_image}
 
-# Install RVM & Ruby 2.3.1
+# Install RVM & Ruby 2.4.0
 RUN gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB \
-        && curl -sSL https://raw.githubusercontent.com/rvm/rvm/stable/binscripts/rvm-installer | bash -s stable --ruby=2.3.1 \
-        && /bin/bash -c "source /usr/local/rvm/scripts/rvm && gem install bundler '--version=1.11.2' --no-format-executable" \
+        && curl -sSL https://raw.githubusercontent.com/rvm/rvm/stable/binscripts/rvm-installer | bash -s stable --ruby=2.4.0 \
+        && /bin/bash -c "source /usr/local/rvm/scripts/rvm && gem install bundler --no-format-executable" \
         && echo "source /usr/local/rvm/scripts/rvm" >> ~/.bashrc
 # Install dumb-init
 RUN wget -O /usr/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 \
