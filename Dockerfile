@@ -22,7 +22,7 @@ RUN wget -O /usr/bin/dumb-init https://github.com/Yelp/dumb-init/releases/downlo
 RUN /bin/bash -c "source /usr/local/rvm/scripts/rvm && gem install configgin --version=0.18.4"
 
 # Install additional dependencies
-RUN zypper -n in jq rsync
+RUN zypper -n in jq rsync fuse
 
 ADD monitrc.erb /opt/fissile/monitrc.erb
 
