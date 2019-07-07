@@ -1,4 +1,4 @@
-FROM splatform/os-image-opensuse:42.2
+FROM splatform/os-image-opensuse:42.3
 
 # Install RVM & Ruby 2.3.1
 RUN zypper -n in --force-resolution libopenssl-devel \
