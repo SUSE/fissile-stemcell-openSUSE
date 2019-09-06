@@ -1,3 +1,6 @@
+# IMPORTANT! THIS STEMCELL VERSION ONLY WORKS WITH THE CF-OPERATOR
+# IT DOESN'T WORK WITH SCF-V2 AND FISSILE BASED ON ROLE-MANIFESTS
+
 # fissile-stemcell-openSUSE
 
 This repository is intended to be used as base for creating fissile[1] docker[2] stemcells to be deployed on Cloud Foundry[3].
